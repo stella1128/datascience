@@ -21,8 +21,7 @@ data.test <- read.csv("pml-testing.csv", header=T, stringsAsFactors=F)
 data.train[data.train==""] <- NA
 
 ## calculate missing rate for each variable
-table(apply(data.train, 2, function(x){sum(is.na(x))/length(x)})) 
-####100 variables with ~98% missing rate, which should be removed
+table(apply(data.train, 2, function(x){sum(is.na(x))/length(x)})) #100 variables with ~98% missing rate, which should be removed
 
 d.train <- data.train[ ,apply(data.train, 2, function(x){all(!is.na(x))})]
 
@@ -42,17 +41,20 @@ var.remove <- c("X","user_name","cvtd_timestamp","set","classe")
 var.cont <- colnames(d)[!is.element(colnames(d), var.remove)]
 
 for(i in var.cont){
+
 	pdf(paste("histograms/", i, ".pdf", sep=""))
+	
 	hist(d[,i], xlab=i, main=i)
+	
 	dev.off()
 }
 
 ### 1) Predictors 
 data <- d[,!is.element(colnames(d), var.remove)]
 
-colnames(data)[nearZeroVar(data)]	###near zero variance
+colnames(data)[nearZeroVar(data)]	#near zero variance
 
-colnames(data)[findCorrelation(cor(data),0.9)]	###multicollinearity
+colnames(data)[findCorrelation(cor(data),0.9)]	#multicollinearity
 
 findLinearCombos(data)	#linear combinations
 
