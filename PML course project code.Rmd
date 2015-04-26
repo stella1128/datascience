@@ -15,19 +15,20 @@ data.train <- read.csv("pml-training.csv", header=T, stringsAsFactors=F)
 
 data.test <- read.csv("pml-testing.csv", header=T, stringsAsFactors=F)
 
-# data cleaning
+# Data cleaning
 
 ## recode missing values
 data.train[data.train==""] <- NA
 
 ## calculate missing rate for each variable
 table(apply(data.train, 2, function(x){sum(is.na(x))/length(x)})) 
-###100 variables with ~98% missing rate, which should be removed
+####100 variables with ~98% missing rate, which should be removed
+
 d.train <- data.train[ ,apply(data.train, 2, function(x){all(!is.na(x))})]
 
 d.test <- data.test[ ,apply(data.train, 2, function(x){all(!is.na(x))})]
 
-# pre-processing 
+# Data pre-processing 
 
 ## combine training and testing datasets
 d <- rbind(cbind(d.train[,-ncol(d.train)], set="training"), cbind(d.test[,-ncol(d.test)], set="testing"))
