@@ -49,7 +49,7 @@ for(i in var.cont){
 	dev.off()
 }
 
-### 1) Predictors 
+### 1) predictors 
 data <- d[,!is.element(colnames(d), var.remove)]
 
 colnames(data)[nearZeroVar(data)]	#near zero variance
@@ -58,7 +58,7 @@ colnames(data)[findCorrelation(cor(data),0.9)]	#multicollinearity
 
 findLinearCombos(data)	#linear combinations
 
-### 2) Outcome
+### 2) outcome
 table(d.train$classe)
 
 o <- data.frame(classe=d.train$classe, user=d.train$user_name, timestamp=strptime(d.train$cvtd_timestamp, "%d/%m/%Y %H:%M"))
@@ -76,20 +76,27 @@ d.test.qc <- d[d$set=="testing", ]
 
 # Modeling
 rep <- 5 	#repeats of cross validation
+
 fold <- 5	#folds of cross validation
 
 ## penalized multinomial logistic regression
 set.seed(1128)
+
 glmFit <- train(d.train.qc[,!is.element(colnames(d.train.qc), var.remove)], d.train.qc$classe, method="multinom", preProc=c("center","scale"), tuneGrid = expand.grid(.decay=seq(0,0.1,by=0.01)), metric="Accuracy", trControl=trainControl(method="repeatedcv", number=fold, repeats=rep, classProbs=T), maxit=1000)
+
 save(glmFit, file="fit.RData")
 
 Fit <- glmFit
+
 plot(Fit)
+
 Classes <- predict(Fit, newdata=d.test.qc[,!is.element(colnames(d.test.qc), var.remove)])
+
 varImp(Fit)
 
 ## write out result files	
 answers = as.character(Classes)
+
 pml_write_files = function(x){   
 	n = length(x)   
 	for(i in 1:n){     
