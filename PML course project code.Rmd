@@ -2,9 +2,13 @@
 setwd("/Users/Serena/Courses/Practical Machine Learning (Coursera)/project")
 
 library(caret)
+
 library(eeptools)
+
 library(chron)
+
 library(pROC)
+
 library(ggplot2)
 
 data.train <- read.csv("pml-training.csv", header=T, stringsAsFactors=F)
