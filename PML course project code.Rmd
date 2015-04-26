@@ -38,7 +38,9 @@ d$new_window <- ifelse(d$new_window=="yes", 1, 0)
 
 ## histogram for each continuous variable
 var.remove <- c("X","user_name","cvtd_timestamp","set","classe")
+
 var.cont <- colnames(d)[!is.element(colnames(d), var.remove)]
+
 for(i in var.cont){
 	pdf(paste("histograms/", i, ".pdf", sep=""))
 	hist(d[,i], xlab=i, main=i)
@@ -47,8 +49,11 @@ for(i in var.cont){
 
 ### 1) Predictors 
 data <- d[,!is.element(colnames(d), var.remove)]
+
 colnames(data)[nearZeroVar(data)]	###near zero variance
+
 colnames(data)[findCorrelation(cor(data),0.9)]	###multicollinearity
+
 findLinearCombos(data)	#linear combinations
 
 ### 2) Outcome
