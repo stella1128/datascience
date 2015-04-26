@@ -60,19 +60,18 @@ findLinearCombos(data)	#linear combinations
 
 ### 2) Outcome
 table(d.train$classe)
-o <- data.frame(classe=d.train$classe, user=d.train$user_name, timestamp=strptime(d.train$cvtd_timestamp, "%d/%m/%Y %H:%M"))
-o[,c("date","time")] <- do.call(rbind, strsplit(as.character(o$timestamp), " "))
 
-library(ggplot2)
+o <- data.frame(classe=d.train$classe, user=d.train$user_name, timestamp=strptime(d.train$cvtd_timestamp, "%d/%m/%Y %H:%M"))
+
 pdf("classe_by_user.pdf")
+
 qplot(factor(user), data=o, geom="bar", fill=classe, xlab="User", ylab="Frequency")
+
 dev.off()
 
 ## split training and test set
-table(d.train$user_name)
-table(d.test$user_name)
-
 d.train.qc <- cbind(d[d$set=="training", ], classe=d.train[,ncol(d.train)])
+
 d.test.qc <- d[d$set=="testing", ]
 
 # Modeling
