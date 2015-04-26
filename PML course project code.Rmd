@@ -18,7 +18,8 @@ data.train[data.train==""] <- NA
 sum(is.na(data.train))
 
 ## calculate missing rate for each variable
-table(apply(data.train, 2, function(x){sum(is.na(x))/length(x)})) #100 variables with ~98% missing rate, which should be removed
+table(apply(data.train, 2, function(x){sum(is.na(x))/length(x)})) 
+###100 variables with ~98% missing rate, which should be removed
 d.train <- data.train[ ,apply(data.train, 2, function(x){all(!is.na(x))})]
 d.test <- data.test[ ,apply(data.train, 2, function(x){all(!is.na(x))})]
 
@@ -41,10 +42,8 @@ for(i in var.cont){
 
 ### 1) Predictors 
 data <- d[,!is.element(colnames(d), var.remove)]
-colnames(data)[nearZeroVar(data)]	#near zero variance
-#new_window
-colnames(data)[findCorrelation(cor(data),0.9)]	#multicollinearity
-#"accel_belt_z"     "roll_belt"        "accel_belt_y"     "accel_belt_x"     "gyros_arm_y"      "gyros_forearm_z" "gyros_dumbbell_x"
+colnames(data)[nearZeroVar(data)]	###near zero variance
+colnames(data)[findCorrelation(cor(data),0.9)]	###multicollinearity
 findLinearCombos(data)	#linear combinations
 
 ### 2) Outcome
