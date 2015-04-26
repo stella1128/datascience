@@ -108,6 +108,7 @@ pml_write_files = function(x){
 		write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)   
 	} 
 } 
+
 pml_write_files(answers) 
 
 ## out-of-sample errors - leave one subject out at each iteration
@@ -144,8 +145,12 @@ for(user in unique(d.train.qc$user_name)){
 }
 ### overall performance (weighted average across all subjects)
 temp <- c()
+
 for(i in 2:5){
+
 	temp <- c(temp, weightedAvg(as.numeric(p[,i]), table(d.train.qc$user_name)[p[,1]]))
+	
 }
+
 write.table(rbind(p, c("overall",temp)), "performance.txt", quote=F, sep="\t", row.name=F, col.name=T)
 
