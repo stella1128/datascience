@@ -12,6 +12,7 @@ library(pROC)
 library(ggplot2)
 
 data.train <- read.csv("pml-training.csv", header=T, stringsAsFactors=F)
+
 data.test <- read.csv("pml-testing.csv", header=T, stringsAsFactors=F)
 
 # data cleaning
