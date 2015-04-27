@@ -1,19 +1,72 @@
-<p align="center">
+
+Skip to content
+This repository
+
+    Explore
+    Gist
+    Blog
+    Help
+
+    @stella1128 stella1128
+
+You don't have any verified emails. We recommend verifying at least one email.
+
+Email verification helps our support team verify ownership if you lose account access and allows you to receive all the notifications you ask for.
+
+0
+0
+
+    0
+
+stella1128/stella1128.gitbub.io
+
+stella1128.gitbub.io/index.html
+@stella1128 stella1128 9 minutes ago Create gh-pages branch via GitHub
+
+1 contributor
+136 lines (108 sloc) 5.75 kb
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>PML course project report by stella1128</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">PML course project report</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/stella1128/stella1128.gitbub.io" class="btn">View on GitHub</a>
+      <a href="https://github.com/stella1128/stella1128.gitbub.io/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/stella1128/stella1128.gitbub.io/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p align="center">
     Practice Machine Learning course project report
 </p>
+
 <p align="center">
     Ying Han
 </p>
+
 <p align="center">
     April 26, 2015
 </p>
+
 <p>
     <strong>Data cleaning and pre-processing</strong>
 </p>
+
 <p>
-    <u>Features</u>
+    Features
     :
 </p>
+
 <p>
     There are 160 variables provided in the original datasets. Of these variables, 100 have a missing rate of ~98% which were thus removed from the analysis.
     For predictive analysis, 4 variables including outcome “classe”, row number “X”, subject identifier “user_name”, and measurement time stamp
@@ -21,71 +74,93 @@
     binary variable and was thus recoded as 0/1, while the rest are continuous variables. To speed up the convergence in optimizing the objective function, I
     performed feature scaling by centering each variable on its mean and then scaling it to unit length.
 </p>
+
 <p>
-    <u>Outcome</u>
+    Outcome
     :
 </p>
+
 <p>
     There are five possible classes of the outcome, labeled as A, B, C, D, and E. The features and outcomes were monitored on 6 subjects (by examining the
     variable “user_name”). As shown in <strong>Figure 1</strong>, the frequency of each class is relatively balanced across all 6 subjects, without any
     dominating class in the distribution. Therefore, I used overall accuracy instead of kappa statistics, which is more appropriate for skewed distributions,
     as the model performance metric.
 </p>
+
 <p>
-    <img
-        src="file://localhost/Users/Serena/Library/Caches/TemporaryItems/msoclip/0/clip_image002.png"
-        alt="Description: Macintosh HD:Users:Serena:Courses:Practical Machine Learning (Coursera):project:classe_by_user.pdf"
-        height="299"
-        width="299"
-    />
+    <img src="https://cloud.githubusercontent.com/assets/11446374/7339990/1e45a90c-ec37-11e4-8226-f59063ad07bd.png" alt="Description: Macintosh HD:Users:Serena:Courses:Practical Machine Learning (Coursera):project:classe_by_user.pdf" height="600" width="600">
 </p>
+
 <p>
     Figure 1. Distribution of activity quality (classe) across users
 </p>
-<strong>
-    <br clear="all"/>
-</strong>
+
+<p><strong>
+    <br clear="all">
+</strong></p>
+
 <p>
     <strong> </strong>
 </p>
+
 <p>
     <strong>Model building</strong>
 </p>
+
 <p>
     Based on the pre-processed training dataset, I built the model using penalized multinomial logistic regression. This algorithm is appropriate for
     classification problems with multiple (&gt;2) classes. By including a penalty term in the model, it incorporates feature selection (ie., reducing
     multicollinearity among features selected in the final model) and also controls the bias-variance tradeoff. To tune the hyperparameter in the penalty term,
     I used 5-time repeated 5-fold cross validation to prevent overfitting.
 </p>
+
 <p>
     To estimate the out-of-sample error, I split the original training dataset into a training set and a validation set using leave-one-subject-out strategy.
     In other words, data collected from one subject went to the validation set and the rest went to the training set, and this process was repeated on every
     one of the 6 subjects. Within each iteration, the training set was used to fit the model and the validation set was used to estimate the prediction
     accuracy. The out-of-sample error was estimated by averaging the confusion matrices over all subjects.
 </p>
+
 <p>
     <strong>Performance evaluation</strong>
 </p>
+
 <p>
     The model performance on each left-out subject and overall (weighted average) is shown in <strong>Table 1</strong>. The out-of-sample accuracy is estimated
     to be 76%.
 </p>
+
 <p>
     <strong> </strong>
 </p>
+
 <p>
     Table 1. Model performance on each subject and overall
 </p>
+
 <p>
-    <img
-        src="file://localhost/Users/Serena/Library/Caches/TemporaryItems/msoclip/0/clip_image004.png"
-        alt="Description: Macintosh HD:Users:Serena:Desktop:performance.png"
-        height="96"
-        width="220"
-    />
+    <img src="https://cloud.githubusercontent.com/assets/11446374/7340004/75ba9b98-ec37-11e4-9094-2779d9ec58bf.png" alt="Description: Macintosh HD:Users:Serena:Desktop:performance.png" height="192" width="440">
 </p>
+
 <p>
     Given the limited time, I only implemented one machine-learning algorithm (penalized multinomial logistic regression); if given more time, I would like to
     apply different algorithms, evaluate their performances using the above frameworks, and choose the one with the best performance to predict on the testing
     dataset.
 </p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/stella1128/stella1128.gitbub.io">PML course project report</a> is maintained by <a href="https://github.com/stella1128">stella1128</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
+    Status API Training Shop Blog About 
+
+    © 2015 GitHub, Inc. Terms Privacy Security Contact 
+
