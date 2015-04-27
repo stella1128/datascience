@@ -1,1 +1,1 @@
-### You may find Figure 1 and Table 1 in "Issues"
+### To veiw the report, you may click "PML course project report.html", and then click on the "raw" button on top of the HTML codes. After that, you may save the page into an html document (for example in Firefox, through "File -> Save Page As") and then double click to open it. Please feel free to contact me (stella1128@gmail.com) if you have any questions. I would be more than happy to send you the html webpage directly.
